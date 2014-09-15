@@ -1,6 +1,7 @@
 FROM planitar/base
 
-RUN apt-get install -y postgresql postgresql-contrib && apt-get clean
+RUN apt-get install -y postgresql postgresql-contrib postgresql-9.3-plv8 && \
+    apt-get -y clean
 
 # Default values are OK, thus keep them as is.
 
