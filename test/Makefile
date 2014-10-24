@@ -1,6 +1,7 @@
 .PHONY: test
 
 test: test-default-values
+	make -C default-extensions test
 	make -C simple test
 	make -C override-all test
 
