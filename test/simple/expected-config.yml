@@ -1,0 +1,8 @@
+name: simple
+role: simplerole
+listen-addr: '*'
+extensions:
+- pgcrypto
+- citext
+- hstore
+- plv8

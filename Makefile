@@ -16,3 +16,4 @@ clean:
 	docker rmi -f planitar/postgresql || true
 
 test:
+	make -C test test

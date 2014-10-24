@@ -1,0 +1,7 @@
+# `name` and `role` are to be provided by the "child" image
+listen-addr: "*"
+extensions:
+- pgcrypto
+- citext
+- hstore
+- plv8

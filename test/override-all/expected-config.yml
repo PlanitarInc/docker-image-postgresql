@@ -1,0 +1,10 @@
+name: overrideall
+role: overriderole
+listen-addr: 127.0.0.1
+extensions:
+- pgcrypto
+- citext
+- hstore
+- plv8
+- ext1
+- exttwo
