@@ -5,3 +5,4 @@ extensions:
 - citext
 - hstore
 - plv8
+- pg_stat_statements

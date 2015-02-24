@@ -5,6 +5,7 @@ extensions:
 - pgcrypto
 - citext
 - hstore
+- pg_stat_statements
 - plv8
 - ext1
 - exttwo
