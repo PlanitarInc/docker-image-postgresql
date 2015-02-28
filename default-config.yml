@@ -6,3 +6,4 @@ extensions:
 - hstore
 - plv8
 - pg_stat_statements
+- unaccent
