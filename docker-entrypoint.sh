@@ -55,7 +55,11 @@ $op USER "$POSTGRES_USER" WITH SUPERUSER $pass ;
 EOSQL
     echo
 
-    { echo; echo "host all all 0.0.0.0/0 $authMethod"; } >> "$PGDATA"/pg_hba.conf
+    {
+      echo '';
+      echo '### HOOK ### can be used to insert any additional rules';
+      echo "host all all 0.0.0.0/0 $authMethod";
+    } >> "$PGDATA"/pg_hba.conf
 
     if [ -d /docker-entrypoint-initdb.d ]; then
       for f in /docker-entrypoint-initdb.d/*.sh; do
