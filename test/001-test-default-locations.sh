@@ -7,6 +7,9 @@ test_done() { docker rm -f postgres-default-ext; exit ${1:-0}; }
 
 sleep 3s
 
+docker exec -t postgres-default-ext psql -U postgres \
+  -f /opt/docker-entrypoint/misc/default-extensions.sql || test_done $?
+
 # Check `citext` extension availability
 docker exec -t postgres-default-ext psql -U postgres -c '
   CREATE TABLE verify_citext_is_available (a citext);

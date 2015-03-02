@@ -24,10 +24,11 @@ ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /dbdata/postgres
 VOLUME /dbdata/postgres
 
-COPY docker-entrypoint.sh /
-ADD docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
+COPY entry.sh /opt/docker-entrypoint/entry.sh
+COPY initdb.d/ /opt/docker-entrypoint/init.d/
+COPY misc/ /opt/docker-entrypoint/misc/
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/opt/docker-entrypoint/entry.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
