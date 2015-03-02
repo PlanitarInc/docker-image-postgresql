@@ -58,7 +58,7 @@ EOSQL
     {
       echo '';
       echo '### HOOK ### can be used to insert any additional rules';
-      echo "host all all 0.0.0.0/0 $authMethod";
+      echo "host all $POSTGRES_USER 0.0.0.0/0 $authMethod";
     } >> "$PGDATA"/pg_hba.conf
 
     if [ -d /docker-entrypoint-initdb.d ]; then
