@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo 'Creating default extensions'
 
 gosu postgres postgres --single -jE <<EOSQL
