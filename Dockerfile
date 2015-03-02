@@ -25,8 +25,6 @@ ENV PGDATA /dbdata/postgres
 VOLUME /dbdata/postgres
 
 COPY entry.sh /opt/docker-entrypoint/entry.sh
-COPY initdb.d/ /opt/docker-entrypoint/init.d/
-COPY misc/ /opt/docker-entrypoint/misc/
 
 ENTRYPOINT ["/opt/docker-entrypoint/entry.sh"]
 

@@ -61,8 +61,8 @@ EOSQL
       echo "host all $POSTGRES_USER 0.0.0.0/0 $authMethod";
     } >> "$PGDATA"/pg_hba.conf
 
-    if [ -d /docker-entrypoint-initdb.d ]; then
-      for f in /docker-entrypoint-initdb.d/*.sh; do
+    if [ -d /opt/docker-entrypoint/initdb.d ]; then
+      for f in /opt/docker-entrypoint/initdb.d/*.sh; do
 	[ -f "$f" ] && . "$f"
       done
     fi

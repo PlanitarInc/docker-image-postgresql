@@ -17,4 +17,4 @@ clean:
 	docker rmi -f ${IMAGE_NAME} || true
 
 test:
-	make -C test test
+	./test.sh
