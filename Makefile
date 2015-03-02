@@ -1,5 +1,5 @@
 # XXX no versioning of the docker image
-IMAGE_NAME=planitar/postgresql
+IMAGE_NAME=planitar/postgres
 
 .PHONY: build push clean test
 

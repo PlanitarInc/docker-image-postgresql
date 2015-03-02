@@ -1,22 +1,33 @@
 FROM planitar/base
 
-RUN apt-get install -y postgresql postgresql-contrib postgresql-9.3-plv8 && \
-    apt-get -y clean
+# Based on https://github.com/docker-library/postgres
 
-ADD default-config.yml /src/default-config.yml
-ADD apply_config.py /src/apply_config.py
+ENV PG_MAJOR 9.3
+ENV PG_VERSION 9.3.6-1.pgdg14.04+1
 
-# Any "child" image should provide a `config.yml` file
-ONBUILD ADD ./config.yml /src/image-config.yml
-ONBUILD RUN /src/apply_config.py /src/default-config.yml /src/image-config.yml
-ONBUILD RUN chown postgres:postgres /src/config.yml /src/config.sql
-ONBUILD RUN service postgresql start && \
-	    su postgres -c "psql -f /src/config.sql" && \
-	    service postgresql stop
-ONBUILD USER postgres
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+      apt-key add - && \
+    echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJOR \
+      >/etc/apt/sources.list.d/pgdg.list && \
+    apt-get update && \
+    apt-get install -y postgresql-common && \
+    sed -ri 's/#(create_main_cluster) .*$/\1 = false/' \
+      /etc/postgresql-common/createcluster.conf && \
+    apt-get install -y postgresql-$PG_MAJOR=$PG_VERSION \
+      postgresql-contrib-$PG_MAJOR=$PG_VERSION \
+      postgresql-$PG_MAJOR-plv8 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
+
+ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
+ENV PGDATA /dbdata/postgres
+VOLUME /dbdata/postgres
+
+COPY docker-entrypoint.sh /
+ADD docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 5432
-
-CMD ["/usr/lib/postgresql/9.3/bin/postgres", \
-    "-D", "/var/lib/postgresql/9.3/main", \
-    "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
+CMD ["postgres"]
