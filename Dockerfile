@@ -22,7 +22,6 @@ RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /dbdata/postgres
-VOLUME /dbdata/postgres
 
 COPY entry.sh /opt/docker-entrypoint/entry.sh
 
