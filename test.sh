@@ -2,7 +2,7 @@
 
 set -ex
 
-docker run -d --name test-postgres planitar/postgres
+docker run -d --name test-postgres -v /dbdata/postgres planitar/postgres
 test_done() { docker rm -f test-postgres; exit ${1:-0}; }
 
 sleep 3s
