@@ -16,7 +16,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     apt-get install -y postgresql-$PG_MAJOR=$PG_VERSION \
       postgresql-contrib-$PG_MAJOR=$PG_VERSION \
       postgresql-$PG_MAJOR-plv8 && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
