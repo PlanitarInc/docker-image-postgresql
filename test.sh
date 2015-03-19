@@ -6,7 +6,7 @@ cleanup() {
   docker rm -f test-postgres
 }
 report() {
-  docker logs planitar/postgres
+  docker logs test-postgres
   echo "Test failed..."
 }
 trap report ERR
