@@ -3,7 +3,7 @@ FROM planitar/base
 # Based on https://github.com/docker-library/postgres
 
 ENV PG_MAJOR 9.4
-ENV PG_VERSION 9.4.1-1.pgdg14.04+1
+ENV PG_VERSION 9.4.2-1.pgdg14.04+1
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
       apt-key add - && \
