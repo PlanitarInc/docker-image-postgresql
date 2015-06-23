@@ -3,7 +3,6 @@ FROM planitar/base
 # Based on https://github.com/docker-library/postgres
 
 ENV PG_MAJOR 9.4
-ENV PG_VERSION 9.4.2-1.pgdg14.04+1
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
       apt-key add - && \
@@ -13,8 +12,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     apt-get install -y postgresql-common && \
     sed -ri 's/#(create_main_cluster) .*$/\1 = false/' \
       /etc/postgresql-common/createcluster.conf && \
-    apt-get install -y postgresql-$PG_MAJOR=$PG_VERSION \
-      postgresql-contrib-$PG_MAJOR=$PG_VERSION \
+    apt-get install -y postgresql-$PG_MAJOR \
+      postgresql-contrib-$PG_MAJOR \
       postgresql-$PG_MAJOR-plv8 && \
     apt-get clean
 
