@@ -9,6 +9,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJOR \
       >/etc/apt/sources.list.d/pgdg.list && \
     apt-get update && \
+    apt-get install -y libkrb5-3 --reinstall && \
     apt-get install -y postgresql-common && \
     sed -ri 's/#(create_main_cluster) .*$/\1 = false/' \
       /etc/postgresql-common/createcluster.conf && \
