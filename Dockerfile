@@ -25,7 +25,7 @@ ENV PGDATA /dbdata/postgres
 
 COPY entry.sh /opt/docker-entrypoint/entry.sh
 
-ENTRYPOINT ["/opt/docker-entrypoint/entry.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/opt/docker-entrypoint/entry.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
